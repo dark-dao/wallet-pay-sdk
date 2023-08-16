@@ -1,6 +1,6 @@
 {
   "name": "wallet-pay-sdk",
-  "version": "0.0.1-development",
+  "version": "1.0.0",
   "description": "Wallet pay sdk",
   "main": "./lib/index.js",
   "files": [
