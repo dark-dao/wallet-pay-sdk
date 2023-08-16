@@ -1,6 +1,6 @@
 {
   "name": "wallet-pay-sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Wallet pay sdk",
   "main": "./lib/index.js",
   "files": [
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/jest": "^27.5.2",
     "@types/node": "^12.20.11",
+    "@types/node-fetch": "^2.6.4",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
@@ -106,6 +107,6 @@
     ]
   },
   "dependencies": {
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^2.6.12"
   }
 }
