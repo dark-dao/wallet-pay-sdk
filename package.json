@@ -1,6 +1,6 @@
 {
   "name": "wallet-pay-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wallet pay sdk",
   "main": "./lib/index.js",
   "files": [
@@ -31,15 +31,8 @@
     "node": ">=12.0"
   },
   "keywords": [
-    "boilerplate",
-    "template",
-    "typescript",
-    "vscode",
-    "jest",
-    "husky",
-    "commitizen",
-    "semantic-release",
-    "codecov"
+    "wallet-pay",
+    "sdk"
   ],
   "bugs": {
     "url": "https://github.com/dark-dao/wallet-pay-sdk/issues"
