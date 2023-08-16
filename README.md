@@ -4,9 +4,13 @@ SDK for using WalletPay API - https://docs.wallet.tg/pay/
 
 Supported API methods list:
 https://pay.wallet.tg/wpay/store-api/v1/order
+
 https://pay.wallet.tg/wpay/store-api/v1/order/preview
+
 https://pay.wallet.tg/wpay/store-api/v1/reconciliation/order-list
+
 https://pay.wallet.tg/wpay/store-api/v1/reconciliation/order-amount
+
 
 There is also a method to check the hash of a webhook
 
