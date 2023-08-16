@@ -10,3 +10,8 @@ export class CreateOrderDto {
   timeoutSeconds?: number;
   customerTelegramUserId!: number;
 }
+
+export class GetOrderListDto {
+  offset!: number;
+  count!: number;
+}

@@ -2,7 +2,7 @@
 import fetch from 'node-fetch';
 import { createHmac } from 'crypto';
 
-import { CreateOrderDto } from './dto';
+import { CreateOrderDto, GetOrderListDto } from './dto';
 import {
   IResponseError,
   ICreateOrderResponse,
@@ -87,7 +87,7 @@ export class WalletPaySDK {
   }
 
   /**
-   * @param dto Create an order
+   * Create an order
    * POST https://pay.wallet.tg/wpay/store-api/v1/order/preview?id=${orderId}
    *
    * @param {string | number} orderId *required - Order id
@@ -114,8 +114,11 @@ export class WalletPaySDK {
   }
 
   /**
-   * Return list of store orders sorted by creation time in ascending order
+   * @param dto Return list of store orders sorted by creation time in ascending order
    * GET wpay/store-api/v1/reconciliation/order-list
+   *
+   * @param {number} dto.offset *required >= 0 Specifying the amount of excluded from a response the first N orders
+   * @param {number} dto.count  *required [ 0 .. 10000 ] Specifying the limit of orders for the request
    *
    * @returns
    * @type {IGetOrderListResponse}
@@ -125,12 +128,14 @@ export class WalletPaySDK {
    *   @property items: IOrderReconciliationList[];
    * }
    */
-  async getOrderList(): Promise<IGetOrderListResponse | IResponseError> {
+  async getOrderList(
+    dto: GetOrderListDto
+  ): Promise<IGetOrderListResponse | IResponseError> {
     try {
       if (!this.initOptions.apiKey)
         return { error: new Error('apiKey is not defined!') };
 
-      const url = `${this.apiUrl}wpay/store-api/v1/reconciliation/order-list`;
+      const url = `${this.apiUrl}wpay/store-api/v1/reconciliation/order-list?offset=${dto.offset}&count=${dto.offset}`;
       const method = 'GET';
       const headers: { [key: string]: string } = this.getHeaders();
       const response = await fetch(url, {
