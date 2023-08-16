@@ -135,7 +135,7 @@ export class WalletPaySDK {
       if (!this.initOptions.apiKey)
         return { error: new Error('apiKey is not defined!') };
 
-      const url = `${this.apiUrl}wpay/store-api/v1/reconciliation/order-list?offset=${dto.offset}&count=${dto.offset}`;
+      const url = `${this.apiUrl}wpay/store-api/v1/reconciliation/order-list?offset=${dto.offset}&count=${dto.count}`;
       const method = 'GET';
       const headers: { [key: string]: string } = this.getHeaders();
       const response = await fetch(url, {
