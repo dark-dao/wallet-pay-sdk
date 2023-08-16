@@ -117,8 +117,8 @@ export interface IWebhook {
 
 /**
  * Headers from webhook call from wallet pay
- * @prop timestamp: string - Nano time used for HMAC
- * @prop signature: string - Base64(HmacSHA256("HTTP-method.URI-path.timestamp.Base-64-encoded-body"))
+ * @prop timestamp: string - Nano time used for HMAC from header WalletPay-Timestamp
+ * @prop signature: string - Base64(HmacSHA256("HTTP-method.URI-path.timestamp.Base-64-encoded-body")) from header WalletPay-Signature
  */
 export interface IWebhookRequestSign {
   timestamp: string;
