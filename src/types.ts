@@ -35,6 +35,7 @@ export interface IOrderPreview {
   expirationDateTime: Date | string;
   completedDateTime: Date | string;
   payLink: string;
+  directPayLink: string;
 }
 
 export interface OrderReconciliationItem {
@@ -56,31 +57,37 @@ export interface OrderReconciliationItem {
 
 export type IOrderReconciliationList = OrderReconciliationItem[];
 
-export interface IResponseError {
-  error: any;
-}
-
 export interface ICreateOrderResponse {
   status: ECreateOrderRequestStatus;
   message: string;
   data: IOrderPreview;
 }
 
+export interface IResponseError {
+  error?: any;
+}
+
+export enum EResponseStatus {
+  SUCCESS = 'SUCCESS',
+  INVALID_REQUEST = 'INVALID_REQUEST',
+  INTERNAL_ERROR = 'INTERNAL_ERROR',
+}
+
 export interface IGetOrderPreviewResponse {
-  status: 'SUCCESS';
+  status: EResponseStatus;
   message: string;
   data: IOrderPreview;
 }
 
 export interface IGetOrderListResponse {
-  status: 'SUCCESS' | 'INVALID_REQUEST' | 'INTERNAL_ERROR';
+  status: EResponseStatus;
   message: string;
   data: {
     items: IOrderReconciliationList;
   };
 }
 export interface IGetOrderAmountResponse {
-  status: 'SUCCESS' | 'INVALID_REQUEST' | 'INTERNAL_ERROR';
+  status: EResponseStatus;
   message: string;
   data: {
     totalAmount: number;

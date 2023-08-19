@@ -189,8 +189,11 @@ export class WalletPaySDK {
   webhookVerifyHash(
     update: IWebhookRequest,
     signParams: IWebhookRequestSign
-  ): boolean {
+  ): boolean | IResponseError {
     try {
+      if (!this.initOptions.apiKey)
+        return { error: new Error('apiKey is not defined!') };
+
       const requestBody = JSON.stringify(update.body);
 
       const timestampHeaderValue = signParams.timestamp;
@@ -207,7 +210,6 @@ export class WalletPaySDK {
 
       hmac.update(message);
       const calculatedSignature = hmac.digest('base64');
-
       return calculatedSignature === signParams.signature;
     } catch (error) {
       throw error;
