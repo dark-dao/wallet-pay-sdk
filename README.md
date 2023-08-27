@@ -5,7 +5,9 @@
 [![Downloads Stats][npm-downloads]][npm-url]
 [![Last commit][last-update]][last-update]
 
-![WalletPay](https://pay.wallet.tg/static/images/walletPay@2x.c27d60..png)
+<p align="center">
+  <img src="https://pay.wallet.tg/static/images/walletPay@2x.c27d60..png" width="320">
+</p>
 
 ## Supported endpoints
 
