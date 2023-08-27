@@ -6,7 +6,7 @@
 [![Last commit][last-update]][last-update]
 
 <p align="center">
-  <img src="https://pay.wallet.tg/static/images/walletPay@2x.c27d60..png" width="320">
+  <img src="example-img.gif" width="240">
 </p>
 
 ## Supported endpoints
