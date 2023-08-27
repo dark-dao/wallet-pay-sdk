@@ -147,15 +147,6 @@ const result: boolean | IResponseError = wp.webhookVerifyHash(update, signParams
 // if return TRUE - webhook call is verificated
 ```
 
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-npm test
-```
-
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/wallet-pay-sdk.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/wallet-pay-sdk
