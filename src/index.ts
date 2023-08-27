@@ -4,6 +4,7 @@ import { createHmac } from 'crypto';
 
 import { CreateOrderDto, GetOrderListDto } from './dto';
 import {
+  TInitOptions,
   IResponseError,
   ICreateOrderResponse,
   IGetOrderPreviewResponse,
@@ -13,17 +14,18 @@ import {
   IWebhookRequest,
 } from './types';
 
-type TInitOptions = {
-  apiKey: string;
-  timeoutSeconds?: number | 10800; // 10800 = 60 * 60 * 3 = 3 hours
-};
-
 export class WalletPaySDK {
   private apiUrl = 'https://pay.wallet.tg/';
   initOptions: TInitOptions;
 
-  constructor(opt: TInitOptions) {
-    this.initOptions = opt;
+  /**
+   * Init SDK
+   * @param {string} apiKey                           Store API key
+   * @param {number} timeoutSeconds [ 30 .. 864000 ]  Default value = Order TTL, if the order is not paid within the timeout period
+   *
+   */
+  constructor({ apiKey, timeoutSeconds }: TInitOptions) {
+    this.initOptions = { apiKey, timeoutSeconds };
   }
 
   private getHeaders(): { [key: string]: string } {

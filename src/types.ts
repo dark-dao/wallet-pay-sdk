@@ -21,6 +21,11 @@ export enum EOrderStatus {
   CANCELLED = 'CANCELLED',
 }
 
+export type TInitOptions = {
+  apiKey: string;
+  timeoutSeconds?: number | 10800; // 10800 = 60 * 60 * 3 = 3 hours
+};
+
 export interface IMoneyAmount {
   currencyCode: ECurrencyCode;
   amount: string;
