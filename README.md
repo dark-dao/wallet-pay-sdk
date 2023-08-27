@@ -6,7 +6,7 @@
 [![Last commit][last-update]][last-update]
 
 <p align="center">
-  <img src="example-img.gif" width="240">
+  <img src="https://storage.yandexcloud.net/test-file-storage/telegram-bots/wallet-pay/SDK-preview.gif" width="240">
 </p>
 
 ## Supported endpoints
