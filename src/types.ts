@@ -138,7 +138,7 @@ export interface IWebhookRequestSign {
 }
 
 export interface IWebhookRequest {
-  body: IWebhook;
+  body: IWebhook[];
   originalUrl: string;
   method: string;
 }
