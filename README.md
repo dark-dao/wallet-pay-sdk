@@ -4,11 +4,7 @@
 [![NPM Version][npm-image]][npm-url]
 [![Downloads Stats][npm-downloads]][npm-url]
 [![Last commit][last-update]][last-update]
-
-<!-- README.md -->
-+ [![cov](https://dark-dao.github.io/wallet-pay-sdk/badges/coverage.svg)](https://github.com/dark-dao/wallet-pay-sdk/actions)
-<!-- README.md -->
-+ [![cov](https://we-cli.github.io/jayin/badges/coverage.svg)](https://github.com/we-cli/jayin/actions)
+[![cov](https://dark-dao.github.io/wallet-pay-sdk/badges/coverage.svg)](https://github.com/dark-dao/wallet-pay-sdk/actions)
 
 <p align="center">
   <img src="trealdeal.PNG" width="240">
