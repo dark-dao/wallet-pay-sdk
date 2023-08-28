@@ -15,6 +15,7 @@
     "semantic-release": "semantic-release",
     "test:watch": "jest --watch",
     "test": "jest --coverage",
+    "test:cov": "c8 -r text -r json-summary xv",
     "typecheck": "tsc --noEmit"
   },
   "repository": {
