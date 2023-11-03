@@ -99,7 +99,7 @@ const params: GetOrderListDto = {
   count: 10, // Specifying the limit of orders for the request
 };
 const response: IGetOrderListResponse | IResponseError =
-  await wp.getOrderList({ offset, count });
+  await wp.getOrderList(params);
 ```
 
 ### get order amount
