@@ -12,6 +12,9 @@ import {
   IGetOrderAmountResponse,
   IWebhookRequestSign,
   IWebhookRequest,
+  EWebhookOrderType,
+  ECurrencyCode,
+  EOrderStatus,
 } from './types';
 
 export class WalletPaySDK {

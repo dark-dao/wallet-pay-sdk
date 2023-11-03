@@ -106,7 +106,7 @@ export interface IWebhookPayload {
   id: number; // order id
   number: string;
   externalId: string;
-  customData: string;
+  customData?: string;
   orderAmount: IMoneyAmount;
 
   // json {"amount": {"currencyCode": "TON","amount": "10.0"},"exchangeRate": "1.0"}
@@ -138,7 +138,8 @@ export interface IWebhookRequestSign {
 }
 
 export interface IWebhookRequest {
-  body: IWebhook[];
+  /** fix for random changes wallet pay webhook body */
+  body: any; // IWebhook[];
   originalUrl: string;
   method: string;
 }

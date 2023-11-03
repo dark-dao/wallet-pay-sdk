@@ -135,7 +135,7 @@ const wp = new WalletPaySDK({
  * - method
  */
 const update: IWebhookRequest = {
-  body: IWebhook[], // request body you can see type 'IWebhook' in types file
+  body: [...], // webhook request body you can see type 'IWebhook' in types file
   originalUrl: '/api/wallet-pay/webhook', // URI path exactly the same as set in the personal account
   method: 'POST',
 }
