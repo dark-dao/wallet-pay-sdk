@@ -7,6 +7,12 @@ export enum ECurrencyCode {
   RUB = 'RUB',
 }
 
+export enum EAutoConversionCurrency {
+  TON = 'TON',
+  BTC = 'BTC',
+  USDT = 'USDT',
+}
+
 export enum ECreateOrderRequestStatus {
   SUCCESS = 'SUCCESS',
   ALREADY = 'ALREADY',
@@ -36,6 +42,7 @@ export interface IOrderPreview {
   status: EOrderStatus;
   number: string;
   amount: IMoneyAmount;
+  autoConversionCurrency?: EAutoConversionCurrency;
   createdDateTime: Date | string;
   expirationDateTime: Date | string;
   completedDateTime: Date | string;
