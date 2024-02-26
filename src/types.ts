@@ -69,6 +69,11 @@ export interface OrderReconciliationItem {
 
 export type IOrderReconciliationList = OrderReconciliationItem[];
 
+export interface IResponse<T> {
+  response?: T;
+  error?: any;
+}
+
 export interface ICreateOrderResponse {
   status: ECreateOrderRequestStatus;
   message: string;

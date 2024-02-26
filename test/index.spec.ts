@@ -2,6 +2,7 @@ import fetch from 'node-fetch';
 
 import { WalletPaySDK } from '../src';
 import {
+  IResponse,
   ICreateOrderResponse,
   IGetOrderPreviewResponse,
   IGetOrderAmountResponse,
@@ -27,8 +28,7 @@ jest.mock('node-fetch', () => jest.fn());
 
 describe('WalletPaySDK', () => {
   describe('createOrder', () => {
-    const expectedResponse: ICreateOrderResponse | IResponseError =
-      createOrderResponseFixture;
+    const expectedResponse: ICreateOrderResponse = createOrderResponseFixture;
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
@@ -36,10 +36,12 @@ describe('WalletPaySDK', () => {
 
     it('success', async () => {
       // @ts-ignore
-      const response: ICreateOrderResponse = await new WalletPaySDK({
+      const response: IResponse<ICreateOrderResponse> = await new WalletPaySDK({
         apiKey: 'TEST_KEY',
       }).createOrder(createOrderFixture);
-      expect(createOrderResponseFixture.status).toEqual(response.status);
+      expect(createOrderResponseFixture?.status).toEqual(
+        response.response?.status
+      );
     });
 
     it('without apiKey', async () => {
@@ -65,7 +67,7 @@ describe('WalletPaySDK', () => {
     const orderId = '123333889230';
     const fixture = { ...getOrderPreviewResponseFixture };
     fixture.data.id = orderId;
-    const expectedResponse: IGetOrderPreviewResponse | IResponseError = {
+    const expectedResponse: IGetOrderPreviewResponse = {
       ...fixture,
     };
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
@@ -75,10 +77,11 @@ describe('WalletPaySDK', () => {
 
     it('success', async () => {
       // @ts-ignore
-      const response: IGetOrderPreviewResponse = await new WalletPaySDK({
-        apiKey: 'TEST_KEY',
-      }).getPreviewOrder(orderId);
-      expect(fixture.data.id).toEqual(response.data?.id);
+      const response: IResponse<IGetOrderPreviewResponse> =
+        await new WalletPaySDK({
+          apiKey: 'TEST_KEY',
+        }).getPreviewOrder(orderId);
+      expect(fixture?.data.id).toEqual(response.response?.data?.id);
     });
 
     it('without apiKey', async () => {
@@ -92,7 +95,7 @@ describe('WalletPaySDK', () => {
   });
 
   describe('getOrderAmount', () => {
-    const expectedResponse: IGetOrderAmountResponse | IResponseError = {
+    const expectedResponse: IGetOrderAmountResponse = {
       ...getOrderAmountResponseFixture,
     };
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
@@ -102,11 +105,12 @@ describe('WalletPaySDK', () => {
 
     it('success', async () => {
       // @ts-ignore
-      const response: IGetOrderAmountResponse = await new WalletPaySDK({
-        apiKey: 'TEST_KEY',
-      }).getOrderAmount();
-      expect(getOrderAmountResponseFixture.data.totalAmount).toEqual(
-        response.data.totalAmount
+      const response: IResponse<IGetOrderAmountResponse> =
+        await new WalletPaySDK({
+          apiKey: 'TEST_KEY',
+        }).getOrderAmount();
+      expect(getOrderAmountResponseFixture?.data.totalAmount).toEqual(
+        response.response?.data.totalAmount
       );
     });
 
@@ -121,7 +125,7 @@ describe('WalletPaySDK', () => {
   });
 
   describe('getOrderList', () => {
-    const expectedResponse: IGetOrderListResponse | IResponseError = {
+    const expectedResponse: IGetOrderListResponse = {
       ...getOrderListResponse,
     };
     (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
@@ -131,11 +135,13 @@ describe('WalletPaySDK', () => {
 
     it('success', async () => {
       // @ts-ignore
-      const response: IGetOrderListResponse = await new WalletPaySDK({
-        apiKey: 'TEST_KEY',
-      }).getOrderList(getOrderListFixture);
-      expect(getOrderListResponse.data.items[0].externalId).toEqual(
-        response.data?.items[0].externalId
+      const response: IResponse<IGetOrderListResponse> = await new WalletPaySDK(
+        {
+          apiKey: 'TEST_KEY',
+        }
+      ).getOrderList(getOrderListFixture);
+      expect(getOrderListResponse?.data.items[0].externalId).toEqual(
+        response.response?.data?.items[0].externalId
       );
     });
 

@@ -2,6 +2,7 @@ import { CreateOrderDto, GetOrderListDto } from '../src/dto';
 import {
   IMoneyAmount,
   ECurrencyCode,
+  IResponse,
   ICreateOrderResponse,
   ECreateOrderRequestStatus,
   IGetOrderPreviewResponse,

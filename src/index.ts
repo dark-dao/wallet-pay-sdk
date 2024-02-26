@@ -5,8 +5,9 @@ import { createHmac } from 'crypto';
 import { CreateOrderDto, GetOrderListDto } from './dto';
 import {
   TInitOptions,
-  IResponseError,
   ICreateOrderResponse,
+  IResponse,
+  IResponseError,
   IGetOrderPreviewResponse,
   IGetOrderListResponse,
   IGetOrderAmountResponse,
@@ -67,7 +68,7 @@ export class WalletPaySDK {
    */
   async createOrder(
     dto: CreateOrderDto
-  ): Promise<ICreateOrderResponse | IResponseError> {
+  ): Promise<IResponse<ICreateOrderResponse>> {
     try {
       if (!this.initOptions.apiKey)
         return { error: new Error('apiKey is not defined!') };
@@ -84,8 +85,14 @@ export class WalletPaySDK {
         headers,
         body: JSON.stringify(body),
       });
-      const data = await response.json();
-      return data as ICreateOrderResponse;
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data: ICreateOrderResponse = await response.json();
+      console.log('RESPONSEEEEE: ', data);
+      return { response: data };
     } catch (error) {
       return { error };
     }
@@ -99,7 +106,7 @@ export class WalletPaySDK {
    */
   async getPreviewOrder(
     orderId: string | number
-  ): Promise<IGetOrderPreviewResponse | IResponseError> {
+  ): Promise<IResponse<IGetOrderPreviewResponse>> {
     try {
       if (!this.initOptions.apiKey)
         return { error: new Error('apiKey is not defined!') };
@@ -111,8 +118,13 @@ export class WalletPaySDK {
         method,
         headers,
       });
-      const data = await response.json();
-      return data as IGetOrderPreviewResponse;
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data: IGetOrderPreviewResponse = await response.json();
+      return { response: data };
     } catch (error) {
       return { error };
     }
@@ -135,7 +147,7 @@ export class WalletPaySDK {
    */
   async getOrderList(
     dto: GetOrderListDto
-  ): Promise<IGetOrderListResponse | IResponseError> {
+  ): Promise<IResponse<IGetOrderListResponse>> {
     try {
       if (!this.initOptions.apiKey)
         return { error: new Error('apiKey is not defined!') };
@@ -147,8 +159,13 @@ export class WalletPaySDK {
         method,
         headers,
       });
-      const data = await response.json();
-      return data as IGetOrderListResponse;
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data: IGetOrderListResponse = await response.json();
+      return { response: data };
     } catch (error) {
       return { error };
     }
@@ -166,7 +183,7 @@ export class WalletPaySDK {
    *  @property totalAmount: number;                                                             Store orders total amount
    * }
    */
-  async getOrderAmount(): Promise<IGetOrderAmountResponse | IResponseError> {
+  async getOrderAmount(): Promise<IResponse<IGetOrderAmountResponse>> {
     try {
       if (!this.initOptions.apiKey)
         return { error: new Error('apiKey is not defined!') };
@@ -178,8 +195,13 @@ export class WalletPaySDK {
         method,
         headers,
       });
-      const data = await response.json();
-      return data as IGetOrderAmountResponse;
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data: IGetOrderAmountResponse = await response.json();
+      return { response: data };
     } catch (error) {
       return { error };
     }
