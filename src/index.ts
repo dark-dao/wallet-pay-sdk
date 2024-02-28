@@ -85,13 +85,7 @@ export class WalletPaySDK {
         headers,
         body: JSON.stringify(body),
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data: ICreateOrderResponse = await response.json();
-      console.log('RESPONSEEEEE: ', data);
       return { response: data };
     } catch (error) {
       return { error };
@@ -118,11 +112,6 @@ export class WalletPaySDK {
         method,
         headers,
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data: IGetOrderPreviewResponse = await response.json();
       return { response: data };
     } catch (error) {
@@ -159,11 +148,6 @@ export class WalletPaySDK {
         method,
         headers,
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data: IGetOrderListResponse = await response.json();
       return { response: data };
     } catch (error) {
@@ -195,11 +179,6 @@ export class WalletPaySDK {
         method,
         headers,
       });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
       const data: IGetOrderAmountResponse = await response.json();
       return { response: data };
     } catch (error) {
