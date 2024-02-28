@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+import axios from 'axios';
 
 import { WalletPaySDK } from '../src';
 import {
@@ -23,13 +23,13 @@ import {
   webhookFailedFixture,
 } from './fixtures';
 
-const { Response } = jest.requireActual('node-fetch');
-jest.mock('node-fetch', () => jest.fn());
+const { Response } = jest.requireActual('axios');
+jest.mock('axios', () => jest.fn());
 
 describe('WalletPaySDK', () => {
   describe('createOrder', () => {
     const expectedResponse: ICreateOrderResponse = createOrderResponseFixture;
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
+    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );
@@ -70,7 +70,7 @@ describe('WalletPaySDK', () => {
     const expectedResponse: IGetOrderPreviewResponse = {
       ...fixture,
     };
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
+    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );
@@ -98,7 +98,7 @@ describe('WalletPaySDK', () => {
     const expectedResponse: IGetOrderAmountResponse = {
       ...getOrderAmountResponseFixture,
     };
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
+    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );
@@ -128,7 +128,7 @@ describe('WalletPaySDK', () => {
     const expectedResponse: IGetOrderListResponse = {
       ...getOrderListResponse,
     };
-    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
+    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );

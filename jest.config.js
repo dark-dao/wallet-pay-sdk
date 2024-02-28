@@ -7,6 +7,7 @@ module.exports = {
     '!<rootDir>/src/types/**/*.ts',
     '!<rootDir>/src/dto.ts',
   ],
+  transformIgnorePatterns: ["node_modules/(?!(axios)/)"],
   globals: {
     'ts-jest': {
       diagnostics: false,
