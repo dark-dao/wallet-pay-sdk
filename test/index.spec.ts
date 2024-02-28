@@ -1,4 +1,4 @@
-import axios from 'axios';
+import fetch from 'node-fetch';
 
 import { WalletPaySDK } from '../src';
 import {
@@ -23,13 +23,13 @@ import {
   webhookFailedFixture,
 } from './fixtures';
 
-const { Response } = jest.requireActual('axios');
-jest.mock('axios', () => jest.fn());
+const { Response } = jest.requireActual('node-fetch');
+jest.mock('node-fetch', () => jest.fn());
 
 describe('WalletPaySDK', () => {
   describe('createOrder', () => {
     const expectedResponse: ICreateOrderResponse = createOrderResponseFixture;
-    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );
@@ -47,6 +47,7 @@ describe('WalletPaySDK', () => {
     it('without apiKey', async () => {
       const sdk = new WalletPaySDK({
         apiKey: '',
+        timeoutSeconds: 10800,
       });
       // @ts-ignore
       const result: IResponseError = await sdk.createOrder(createOrderFixture);
@@ -54,7 +55,7 @@ describe('WalletPaySDK', () => {
     });
 
     it('set timeoutSeconds', () => {
-      const timeoutSeconds = 22345;
+      const timeoutSeconds = 10800;
       const sdk = new WalletPaySDK({
         apiKey: 'TEST_KEY',
         timeoutSeconds,
@@ -70,7 +71,7 @@ describe('WalletPaySDK', () => {
     const expectedResponse: IGetOrderPreviewResponse = {
       ...fixture,
     };
-    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );
@@ -98,7 +99,7 @@ describe('WalletPaySDK', () => {
     const expectedResponse: IGetOrderAmountResponse = {
       ...getOrderAmountResponseFixture,
     };
-    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );
@@ -128,7 +129,7 @@ describe('WalletPaySDK', () => {
     const expectedResponse: IGetOrderListResponse = {
       ...getOrderListResponse,
     };
-    (axios as jest.MockedFunction<typeof axios>).mockResolvedValueOnce(
+    (fetch as jest.MockedFunction<typeof fetch>).mockResolvedValueOnce(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       new Response(JSON.stringify(expectedResponse))
     );

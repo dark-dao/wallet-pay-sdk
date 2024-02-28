@@ -1,6 +1,6 @@
 {
   "name": "wallet-pay-sdk",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Wallet pay sdk",
   "main": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
@@ -113,7 +113,7 @@
     ]
   },
   "dependencies": {
-    "axios": "1.6.7",
-    "crypto": "1.0.1"
+    "crypto": "1.0.1",
+    "node-fetch": "2.6.12"
   }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-catch */
-import axios from 'axios';
+import fetch from 'node-fetch';
 import { createHmac } from 'crypto';
 
 import { CreateOrderDto, GetOrderListDto } from './dto';
@@ -29,7 +29,7 @@ export class WalletPaySDK {
    *
    */
   constructor({ apiKey, timeoutSeconds }: TInitOptions) {
-    this.initOptions = { apiKey, timeoutSeconds };
+    this.initOptions = { apiKey, timeoutSeconds: 10800 };
   }
 
   private getHeaders(): { [key: string]: string } {
@@ -74,13 +74,18 @@ export class WalletPaySDK {
         return { error: new Error('apiKey is not defined!') };
 
       const url = `${this.apiUrl}wpay/store-api/v1/order`;
+      const method = 'POST';
       const headers: { [key: string]: string } = this.getHeaders();
       const body: CreateOrderDto = {
         ...dto,
         timeoutSeconds: dto.timeoutSeconds || this.initOptions?.timeoutSeconds,
       };
-      const response = await axios.post(url, body, { headers });
-      const data = response?.data as ICreateOrderResponse;
+      const response = await fetch(url, {
+        method,
+        headers,
+        body: JSON.stringify(body),
+      });
+      const data: ICreateOrderResponse = await response.json();
       return { response: data };
     } catch (error) {
       return { error };
@@ -101,9 +106,13 @@ export class WalletPaySDK {
         return { error: new Error('apiKey is not defined!') };
 
       const url = `${this.apiUrl}wpay/store-api/v1/order/preview?id=${orderId}`;
+      const method = 'GET';
       const headers: { [key: string]: string } = this.getHeaders();
-      const response = await axios.get(url, { headers });
-      const data = response.data as IGetOrderPreviewResponse;
+      const response = await fetch(url, {
+        method,
+        headers,
+      });
+      const data: IGetOrderPreviewResponse = await response.json();
       return { response: data };
     } catch (error) {
       return { error };
@@ -133,9 +142,13 @@ export class WalletPaySDK {
         return { error: new Error('apiKey is not defined!') };
 
       const url = `${this.apiUrl}wpay/store-api/v1/reconciliation/order-list?offset=${dto.offset}&count=${dto.count}`;
+      const method = 'GET';
       const headers: { [key: string]: string } = this.getHeaders();
-      const response = await axios.get(url, { headers });
-      const data = response.data as IGetOrderListResponse;
+      const response = await fetch(url, {
+        method,
+        headers,
+      });
+      const data: IGetOrderListResponse = await response.json();
       return { response: data };
     } catch (error) {
       return { error };
@@ -160,9 +173,13 @@ export class WalletPaySDK {
         return { error: new Error('apiKey is not defined!') };
 
       const url = `${this.apiUrl}wpay/store-api/v1/reconciliation/order-amount`;
+      const method = 'GET';
       const headers: { [key: string]: string } = this.getHeaders();
-      const response = await axios.get(url, { headers });
-      const data = response?.data as IGetOrderAmountResponse;
+      const response = await fetch(url, {
+        method,
+        headers,
+      });
+      const data: IGetOrderAmountResponse = await response.json();
       return { response: data };
     } catch (error) {
       return { error };
