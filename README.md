@@ -50,7 +50,7 @@ const wp = new WalletPaySDK({
   timeoutSeconds: 60 * 60 * 3, // Default value = Order TTL, if the order is not paid within the timeout period
 });
 
-const newOrder: CreateOrderDto = {
+const newOrder = {
   amount: {
     currencyCode: ECurrencyCode.TON,
     amount: '10.67',
@@ -63,8 +63,14 @@ const newOrder: CreateOrderDto = {
   customerTelegramUserId: 12238398, // The customer's telegram id (User_id)
 };
 
-const response: ICreateOrderResponse | IResponseError =
-  await wp.createOrder(newOrder);
+const result = await wp.createOrder(newOrder); // { response?: ICreateOrderResponse, error?: any }
+
+
+if (result?.error) {
+  throw result?.error;
+} else {
+  // success ...
+}
 ```
 
 ### get order preview
@@ -79,7 +85,13 @@ const wp = new WalletPaySDK({
 });
 
 const orderId = '10797500785491970';
-const response: IGetOrderPreviewResponse | IResponseError = await wp.getPreviewOrder(orderId)
+const result = await wp.getPreviewOrder(orderId) // { response?: IGetOrderPreviewResponse, error?: any }
+
+if (result?.error) {
+  throw result?.error;
+} else {
+  // success ...
+}
 ```
 
 ### get order list
@@ -87,7 +99,7 @@ const response: IGetOrderPreviewResponse | IResponseError = await wp.getPreviewO
 ```js
 import { WalletPaySDK } from 'wallet-pay-sdk';
 import { GetOrderListDto } from 'wallet-pay-sdk/lib/dto';
-import { IGetOrderListResponse, IResponseError } from 'wallet-pay-sdk/lib/type';
+import { IGetOrderListResponse } from 'wallet-pay-sdk/lib/type';
 
 const wp = new WalletPaySDK({
   apiKey: 'secret_api_key',
@@ -98,8 +110,13 @@ const params: GetOrderListDto = {
   offset: 0, // Specifying the amount of excluded from a response the first N orders
   count: 10, // Specifying the limit of orders for the request
 };
-const response: IGetOrderListResponse | IResponseError =
-  await wp.getOrderList(params);
+const result = await wp.getOrderList(params); // { response?: IGetOrderListResponse, error?: any }
+
+if (result?.error) {
+  throw result?.error;
+} else {
+  // success ...
+}
 ```
 
 ### get order amount
@@ -113,8 +130,13 @@ const wp = new WalletPaySDK({
   timeoutSeconds: 60 * 60 * 3, // Default value = Order TTL, if the order is not paid within the timeout period
 });
 
-const response: IGetOrderAmountResponse | IResponseError =
-  await wp.getOrderAmount();
+const result = await wp.getOrderAmount(); // { response?: IGetOrderAmountResponse, error?: any }
+
+if (result?.error) {
+  throw result?.error;
+} else {
+  // success ...
+}
 ```
 
 ### webhook hashes verification

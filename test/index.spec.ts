@@ -81,11 +81,13 @@ describe('WalletPaySDK', () => {
       const response: IResponse<IGetOrderPreviewResponse> =
         await new WalletPaySDK({
           apiKey: 'TEST_KEY',
+          timeoutSeconds: 10800,
         }).getPreviewOrder(orderId);
       expect(fixture?.data.id).toEqual(response.response?.data?.id);
     });
 
     it('without apiKey', async () => {
+      // @ts-ignore
       const sdk = new WalletPaySDK({
         apiKey: '',
       });
@@ -109,6 +111,7 @@ describe('WalletPaySDK', () => {
       const response: IResponse<IGetOrderAmountResponse> =
         await new WalletPaySDK({
           apiKey: 'TEST_KEY',
+          timeoutSeconds: 10800,
         }).getOrderAmount();
       expect(getOrderAmountResponseFixture?.data.totalAmount).toEqual(
         response.response?.data.totalAmount
@@ -116,6 +119,7 @@ describe('WalletPaySDK', () => {
     });
 
     it('without apiKey', async () => {
+      // @ts-ignore
       const sdk = new WalletPaySDK({
         apiKey: '',
       });
@@ -139,6 +143,7 @@ describe('WalletPaySDK', () => {
       const response: IResponse<IGetOrderListResponse> = await new WalletPaySDK(
         {
           apiKey: 'TEST_KEY',
+          timeoutSeconds: 10800,
         }
       ).getOrderList(getOrderListFixture);
       expect(getOrderListResponse?.data.items[0].externalId).toEqual(
@@ -147,6 +152,7 @@ describe('WalletPaySDK', () => {
     });
 
     it('without apiKey', async () => {
+      // @ts-ignore
       const sdk = new WalletPaySDK({
         apiKey: '',
       });
@@ -163,6 +169,7 @@ describe('WalletPaySDK', () => {
 
       const sdk = new WalletPaySDK({
         apiKey: 'TEST_KEY',
+        timeoutSeconds: 10800,
       });
       const request: IWebhookRequest = {
         body: webhookSuccessFixture,
@@ -184,6 +191,7 @@ describe('WalletPaySDK', () => {
 
     const sdk = new WalletPaySDK({
       apiKey: 'TEST_KEY',
+      timeoutSeconds: 10800,
     });
     const request: IWebhookRequest = {
       body: webhookFailedFixture,
@@ -202,6 +210,7 @@ describe('WalletPaySDK', () => {
   it('without apiKey', () => {
     const localSign = 'notValidSingHash';
 
+    // @ts-ignore
     const sdk = new WalletPaySDK({
       apiKey: '',
     });
